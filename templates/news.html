@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}News - VSK Gujarat{% endblock %}
+
+{% block content %}
+<!-- Page Banner -->
+<section class="page-banner">
+    <div class="container">
+        <h1>News & Updates</h1>
+        <p>Stay informed about the latest announcements and events at VSK Gujarat</p>
+    </div>
+</section>
+
+<!-- News Content -->
+<section class="news-content">
+    <div class="container">
+        {% if news %}
+        <div class="news-grid">
+            {% for news_item in news %}
+            <div class="news-card">
+                {% if news_item.image %}
+                <div class="news-image">
+                    <img src="{{ url_for('uploaded_file', filename='images/' + news_item.image) }}" alt="{{ news_item.title }}">
+                </div>
+                {% endif %}
+                <div class="news-content">
+                    <h3>{{ news_item.title }}</h3>
+                    <p>{{ news_item.excerpt }}</p>
+                    <div class="news-meta">
+                        <span class="news-date">{{ news_item.created_at }}</span>
+                        <a href="{{ url_for('news_detail', news_id=news_item.id) }}" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-content">
+            <p>No news available yet. Check back later!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

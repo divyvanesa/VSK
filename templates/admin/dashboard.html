@@ -1,0 +1,91 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<!-- Stats Overview -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-newspaper"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.news_count }}</h3>
+            <p>News Articles</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.articles_count }}</h3>
+            <p>Articles</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-images"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.gallery_count }}</h3>
+            <p>Gallery Items</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-book"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.publications_count }}</h3>
+            <p>Publications</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-calendar-day"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.important_days_count }}</h3>
+            <p>Important Days</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="stat-info">
+            <h3>{{ stats.others_count }}</h3>
+            <p>Other Items</p>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="dashboard-section">
+    <h2>Quick Actions</h2>
+    <div class="action-grid">
+        <a href="{{ url_for('admin_news') }}" class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add News</span>
+        </a>
+        <a href="{{ url_for('admin_articles') }}" class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add Article</span>
+        </a>
+        <a href="{{ url_for('admin_gallery') }}" class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add Gallery Item</span>
+        </a>
+        <a href="{{ url_for('admin_publications') }}" class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add Publication</span>
+        </a>
+    </div>
+</div>
+{% endblock %}

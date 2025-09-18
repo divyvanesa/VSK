@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery - VSK Gujarat{% endblock %}
+
+{% block content %}
+<!-- Page Banner -->
+<section class="page-banner">
+    <div class="container">
+        <h1>Gallery</h1>
+        <p>Explore our collection of images and videos</p>
+    </div>
+</section>
+
+<!-- Gallery Content -->
+<section class="gallery-content">
+    <div class="container">
+        {% if gallery_items %}
+        <div class="gallery-grid">
+            {% for item in gallery_items %}
+            <div class="gallery-item">
+                {% if item.type == 'image' %}
+                <div class="gallery-image">
+                    <img src="{{ url_for('uploaded_file', filename='images/' + item.filename) }}" alt="{{ item.title }}">
+                    <div class="gallery-overlay">
+                        <h3>{{ item.title }}</h3>
+                        <a href="{{ url_for('uploaded_file', filename='images/' + item.filename) }}" class="gallery-view" data-fancybox="gallery" data-caption="{{ item.title }}">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="gallery-video">
+                    <video controls>
+                        <source src="{{ url_for('uploaded_file', filename='videos/' + item.filename) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-overlay">
+                        <h3>{{ item.title }}</h3>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-content">
+            <p>No gallery items available yet. Check back later!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+<script>
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+    });
+</script>
+{% endblock %}

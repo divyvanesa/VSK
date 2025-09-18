@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Important Days - VSK Gujarat{% endblock %}
+
+{% block content %}
+<!-- Page Banner -->
+<section class="page-banner">
+    <div class="container">
+        <h1>Important Days</h1>
+        <p>Commemorating significant events and observances</p>
+    </div>
+</section>
+
+<!-- Important Days Content -->
+<section class="important-days-content">
+    <div class="container">
+        {% if important_days %}
+        <div class="important-days-grid">
+            {% for day in important_days %}
+            <div class="important-day-card">
+                {% if day.image %}
+                <div class="important-day-image">
+                    <img src="{{ url_for('uploaded_file', filename='images/' + day.image) }}" alt="{{ day.title }}">
+                </div>
+                {% endif %}
+                <div class="important-day-content">
+                    <h3>{{ day.title }}</h3>
+                    <div class="important-day-date">
+                        <i class="fas fa-calendar-day"></i> {{ day.date }}
+                    </div>
+                    <p>{{ day.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-content">
+            <p>No important days added yet. Check back later!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

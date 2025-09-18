@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Panel - VSK Gujarat{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="{{ url_for('admin_dashboard') }}">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="logo-text">VSK Gujarat Admin</span>
+                </a>
+            </div>
+            <div class="admin-user">
+                <span>Welcome, {{ session.get('admin_username', 'Admin') }}</span>
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-logout">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}" {% if request.path == url_for('admin_dashboard') %}class="active"{% endif %}><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="{{ url_for('admin_news') }}" {% if request.path == url_for('admin_news') %}class="active"{% endif %}><i class="fas fa-newspaper"></i> News</a></li>
+            <li><a href="{{ url_for('admin_articles') }}" {% if request.path == url_for('admin_articles') %}class="active"{% endif %}><i class="fas fa-file-alt"></i> Articles</a></li>
+            <li><a href="{{ url_for('admin_gallery') }}" {% if request.path == url_for('admin_gallery') %}class="active"{% endif %}><i class="fas fa-images"></i> Gallery</a></li>
+            <li><a href="{{ url_for('admin_publications') }}" {% if request.path == url_for('admin_publications') %}class="active"{% endif %}><i class="fas fa-book"></i> Publications</a></li>
+            <li><a href="{{ url_for('admin_important_days') }}" {% if request.path == url_for('admin_important_days') %}class="active"{% endif %}><i class="fas fa-calendar-day"></i> Important Days</a></li>
+            <li><a href="{{ url_for('admin_others') }}" {% if request.path == url_for('admin_others') %}class="active"{% endif %}><i class="fas fa-ellipsis-h"></i> Others</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                            <button class="alert-close">&times;</button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

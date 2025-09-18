@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Articles - VSK Gujarat{% endblock %}
+
+{% block content %}
+<!-- Page Banner -->
+<section class="page-banner">
+    <div class="container">
+        <h1>Educational Articles</h1>
+        <p>Resources and insights to help students excel in their academic journey</p>
+    </div>
+</section>
+
+<!-- Articles Content -->
+<section class="articles-content">
+    <div class="container">
+        {% if articles %}
+        <div class="articles-grid">
+            {% for article in articles %}
+            <div class="article-card">
+                {% if article.image %}
+                <div class="article-image">
+                    <img src="{{ url_for('uploaded_file', filename='images/' + article.image) }}" alt="{{ article.title }}">
+                </div>
+                {% endif %}
+                <div class="article-content">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.excerpt }}</p>
+                    <div class="article-meta">
+                        <span class="article-date">{{ article.created_at }}</span>
+                        <a href="{{ url_for('article_detail', article_id=article.id) }}" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-content">
+            <p>No articles available yet. Check back later!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

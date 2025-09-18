@@ -1,0 +1,24 @@
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="{{ url_for('index') }}">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="logo-text">VSK Gujarat</span>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}" {% if request.path == url_for('index') %}class="active"{% endif %}>Home</a></li>
+                <li><a href="{{ url_for('news') }}" {% if request.path == url_for('news') %}class="active"{% endif %}>News</a></li>
+                <li><a href="{{ url_for('articles') }}" {% if request.path == url_for('articles') %}class="active"{% endif %}>Articles</a></li>
+                <li><a href="{{ url_for('gallery') }}" {% if request.path == url_for('gallery') %}class="active"{% endif %}>Gallery</a></li>
+                <li><a href="{{ url_for('publications') }}" {% if request.path == url_for('publications') %}class="active"{% endif %}>Publications</a></li>
+                <li><a href="{{ url_for('important_days') }}" {% if request.path == url_for('important_days') %}class="active"{% endif %}>Important Days</a></li>
+                <li><a href="{{ url_for('others') }}" {% if request.path == url_for('others') %}class="active"{% endif %}>Others</a></li>
+            </ul>
+        </nav>
+{#        <div class="auth-buttons">#}
+{#            <a href="{{ url_for('admin_login') }}" class="btn btn-login">Admin Login</a>#}
+{#        </div>div#}
+    </div>
+</header>
